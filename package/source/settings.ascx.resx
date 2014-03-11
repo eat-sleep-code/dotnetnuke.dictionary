@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+		
+	<data name="pl_ddl_role_moderate.Text">
+		<value>Moderation Role</value>
+	</data>
+	<data name="pl_ddl_role_moderate.Help">
+		<value>Select the role which will be allowed to moderate submissions to the dictionary.  These users will have full permissions to create, approve, edit, and/or delete items.</value>
+	</data>
+	
+	<data name="pl_ddl_result_limit.Text">
+		<value>Result Limit</value>
+	</data>
+	<data name="pl_ddl_result_limit.Help">
+		<value>Select the maximum number of results to be displayed.</value>
+	</data>
+	
+	<data name="pl_txt_form_width.Text">
+		<value>Form Width</value>
+	</data>
+	<data name="pl_txt_form_width.Help">
+		<value>Enter the width (in pixels) of the form.</value>
+	</data>
+
+	<data name="pl_rad_enable_submission.Text">
+		<value>Enable Submission</value>
+	</data>
+	<data name="pl_rad_enable_submission.Help">
+		<value>Select whether you would like to allow Non-Administrators to enter a submission.</value>
+	</data>
+	
+	<data name="pl_rad_enable_category_selection.Text">
+		<value>Enable Category Selection</value>
+	</data>
+	<data name="pl_rad_enable_category_selection.Help">
+		<value>Select whether you would like to enable category selection.  Category selection is only possible if categories have been created.</value>
+	</data>
+	
+	<data name="pl_ddl_default_category.Text">
+		<value>Default Category</value>
+	</data>
+	<data name="pl_ddl_default_category.Help">
+		<value>Select the default category.  This option is only valid if categories have been created.</value>
+	</data>
+
+	<data name="pl_txt_email_sender.Text">
+		<value>Sender's Email</value>
+	</data>
+	<data name="pl_txt_email_sender.Help">
+		<value>Enter the email address that messages will be sent from.</value>
+	</data>
+
+	<data name="pl_txt_email_moderator.Text">
+		<value>Moderator's Email</value>
+	</data>
+	<data name="pl_txt_email_moderator.Help">
+		<value>Enter the email address(es) that will recieve notifications when new items require approval.  Seperate multiple email addresses with a semicolon.</value>
+	</data>
+	
+	<data name="pl_uncategorized.Text">
+		<value>Uncategorized</value>
+	</data>	
+	<data name="pl_yes.Text">
+		<value>Yes</value>
+	</data>
+	<data name="pl_no.Text">
+		<value>No</value>
+	</data>
+	
+	<data name="pl_action_moderate.Text">
+		<value>Moderate Data</value>
+	</data>
+	<data name="pl_action_category.Text">
+		<value>Manage Categories</value>
+	</data>
+	<data name="pl_action_update.Text">
+		<value>Check For Updates</value>
+	</data>
+	<data name="ContentOptions.Action">
+		<value>Edit Options</value>
+	</data>
+			
+	<data name="pl_btn_update.Text">
+		<value>Update</value>
+	</data>
+	<data name="pl_btn_cancel.Text">
+		<value>Cancel</value>
+	</data>
+</root>

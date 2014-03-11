@@ -1,0 +1,31 @@
+﻿if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_update_trigger]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+drop trigger {databaseOwner}{objectQualifier}[donein_dictionary_update_trigger]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_update_trigger]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+drop trigger {databaseOwner}{objectQualifier}[donein_dictionary_category_update_trigger]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_CUD]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_CUD]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_R]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_R]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_CUD]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_category_CUD]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_R]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_category_R]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}[donein_dictionary]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}[donein_dictionary_category]
+GO

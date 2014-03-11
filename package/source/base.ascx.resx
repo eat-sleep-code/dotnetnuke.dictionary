@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<root>
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="ResMimeType">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="Version">
+		<value>1.0.0.0</value>
+	</resheader>
+	<resheader name="Reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="Writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+		
+	<data name="pl_message_error.Text">
+		<value>An Error Occurred While Processing Your Query</value>
+	</data>
+
+	<data name="lbl_ddl_category.Text">
+		<value>Category</value>
+	</data>	
+	<data name="lbl_ipt_keyword.Text">
+		<value>Search</value>
+	</data>	
+		
+	<data name="pl_ddl_category_edit.Text">
+		<value>Category</value>
+	</data>	
+	<data name="pl_ddl_category_edit.Help">
+		<value>Select a category for this key.</value>
+	</data>
+	
+	<data name="pl_txt_key.Text">
+		<value>Key</value>
+	</data>	
+	<data name="pl_txt_key.Help">
+		<value>Enter the key (word, abbreviation, etc.).</value>
+	</data>
+	
+	<data name="pl_txt_value.Text">
+		<value>Value</value>
+	</data>	
+	<data name="pl_txt_value.Help">
+		<value>Enter the definition value for this key.</value>
+	</data>		
+		
+	<data name="pl_all_categories.Text">
+		<value>All Categories</value>
+	</data>	
+	<data name="pl_uncategorized.Text">
+		<value>Uncategorized</value>
+	</data>	
+	<data name="pl_yes.Text">
+		<value>Yes</value>
+	</data>
+	<data name="pl_no.Text">
+		<value>No</value>
+	</data>
+	
+	<data name="pl_subject.Text">
+		<value>New Dictionary Item Requires Approval</value>
+	</data>
+	<data name="pl_body.Text">
+		<value>A new dictionary item requires your approval.[BR][BR]Key: [KEY][BR]Value: [VALUE][BR][BR]Please login to approve or decline this item: [LINK][BR][BR][BR]</value>
+	</data>
+
+	<data name="pl_action_moderate.Text">
+		<value>Moderate Data</value>
+	</data>
+	<data name="pl_action_category.Text">
+		<value>Manage Categories</value>
+	</data>
+	<data name="pl_action_update.Text">
+		<value>Check For Updates</value>
+	</data>
+	<data name="ContentOptions.Action">
+		<value>Edit Options</value>
+	</data>
+		
+	<data name="pl_btn_create.Text">
+		<value>Add A Definition</value>
+	</data>
+	<data name="pl_btn_moderate.Text">
+		<value>Moderate</value>
+	</data>
+	<data name="pl_btn_update.Text">
+		<value>Update</value>
+	</data>
+	<data name="pl_btn_cancel.Text">
+		<value>Cancel</value>
+	</data>
+</root>

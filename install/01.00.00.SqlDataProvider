@@ -1,0 +1,411 @@
+﻿if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_update_trigger]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+drop trigger {databaseOwner}{objectQualifier}[donein_dictionary_update_trigger]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_update_trigger]') and OBJECTPROPERTY(id, N'IsTrigger') = 1)
+drop trigger {databaseOwner}{objectQualifier}[donein_dictionary_category_update_trigger]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_CUD]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_CUD]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_R]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_R]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_CUD]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_category_CUD]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category_R]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
+drop procedure {databaseOwner}{objectQualifier}[donein_dictionary_category_R]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}[donein_dictionary]
+GO
+
+if exists (select * from {databaseOwner}{objectQualifier}sysobjects where id = object_id(N'{databaseOwner}{objectQualifier}[donein_dictionary_category]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table {databaseOwner}{objectQualifier}[donein_dictionary_category]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}[donein_dictionary] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[int_category] [int] NOT NULL ,
+	[vch_key] [char] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[vch_value] [varchar] (2048) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[int_module] [int] NOT NULL ,
+	[int_author] [int] NOT NULL ,
+	[int_status] [int] NOT NULL ,
+	[date_audit_created] [datetime] NOT NULL ,
+	[date_audit_modified] [datetime] NOT NULL 
+) ON [PRIMARY]
+GO
+
+CREATE TABLE {databaseOwner}{objectQualifier}[donein_dictionary_category] (
+	[ID] [int] IDENTITY (1, 1) NOT NULL ,
+	[vch_category] [varchar] (255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[int_module] [int] NOT NULL ,
+	[int_author] [int] NOT NULL ,
+	[int_status] [int] NOT NULL ,
+	[date_audit_created] [datetime] NOT NULL ,
+	[date_audit_modified] [datetime] NOT NULL 
+) ON [PRIMARY]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_dictionary] WITH NOCHECK ADD 
+	CONSTRAINT [PK_donein_dictionary] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_dictionary_category] WITH NOCHECK ADD 
+	CONSTRAINT [PK_donein_dictionary_category] PRIMARY KEY  CLUSTERED 
+	(
+		[ID]
+	)  ON [PRIMARY] 
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_dictionary] ADD 
+	CONSTRAINT [DF_donein_dictionary_int_category] DEFAULT (0) FOR [int_category],
+	CONSTRAINT [DF_donein_dictionary_int_module] DEFAULT (0) FOR [int_module],
+	CONSTRAINT [DF_donein_dictionary_int_author] DEFAULT (0) FOR [int_author],
+	CONSTRAINT [DF_donein_dictionary_int_status] DEFAULT (0) FOR [int_status],
+	CONSTRAINT [DF_donein_dictionary_date_audit_created] DEFAULT (getdate()) FOR [date_audit_created],
+	CONSTRAINT [DF_donein_dictionary_date_audit_modified] DEFAULT (getdate()) FOR [date_audit_modified]
+GO
+
+ALTER TABLE {databaseOwner}{objectQualifier}[donein_dictionary_category] ADD 
+	CONSTRAINT [DF_donein_dictionary_category_int_module] DEFAULT (0) FOR [int_module],
+	CONSTRAINT [DF_donein_dictionary_category_int_author] DEFAULT (0) FOR [int_author],
+	CONSTRAINT [DF_donein_dictionary_category_int_status] DEFAULT (0) FOR [int_status],
+	CONSTRAINT [DF_donein_dictionary_category_date_audit_created] DEFAULT (getdate()) FOR [date_audit_created],
+	CONSTRAINT [DF_donein_dictionary_category_date_audit_modified] DEFAULT (getdate()) FOR [date_audit_modified]
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}donein_dictionary_CUD
+(
+	@int_id INTEGER,
+	@int_category INTEGER = 0,
+	@vch_key VARCHAR(256) = '',
+	@vch_value VARCHAR(2048) = '',
+	@int_module INTEGER = 0,
+	@int_author INTEGER = 0,
+	@int_status INTEGER = 0
+)
+AS
+
+-- CREATE
+IF @int_ID = 0
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}donein_dictionary(int_category, vch_key, vch_value, int_module, int_author, int_status)
+	VALUES (@int_category, @vch_key, @vch_value, @int_module, @int_author, @int_status)
+
+	SELECT SCOPE_IDENTITY()
+END
+
+-- UPDATE
+IF @int_ID > 0
+BEGIN
+	IF @int_status = 10
+
+		BEGIN
+			UPDATE
+				{databaseOwner}{objectQualifier}donein_dictionary
+			SET
+				int_status = 1
+			WHERE 
+				ID = @int_ID
+		
+			SELECT @int_ID
+		END
+
+	ELSE
+		BEGIN
+			UPDATE
+				{databaseOwner}{objectQualifier}donein_dictionary
+			SET
+				int_category = @int_category, 
+				vch_key = @vch_key, 
+				vch_value = @vch_value, 
+				int_module = @int_module, 
+				int_author = @int_author, 
+				int_status = @int_status
+			WHERE 
+				ID = @int_ID
+		
+			SELECT @int_ID
+		END
+END
+
+-- DELETE
+IF @int_ID < 0
+BEGIN
+	DELETE
+	FROM
+		{databaseOwner}{objectQualifier}donein_dictionary
+	WHERE
+		ID = (@int_ID * -1)
+END
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}[donein_dictionary_R]
+(
+	@int_ID INT = 0,
+	@int_category INT = 0,
+	@vch_key VARCHAR(256) = '',
+	@vch_value VARCHAR(2048) ='',
+	@int_module INT = 0,
+	@int_author INT = 0,
+	@int_status INT = 0,
+	@vch_order_by VARCHAR(64) = '',
+	@int_limit INT = 50
+)
+
+AS
+
+DECLARE @STRSQL NVARCHAR(4000)
+
+IF @int_limit != 20
+	BEGIN
+		SET @STRSQL = 'SELECT DISTINCT TOP 50 dbo.donein_dictionary.vch_key, dbo.donein_dictionary.vch_value FROM dbo.donein_dictionary WHERE vch_key != '''''
+	END
+ELSE
+	BEGIN
+		SET @STRSQL = 'SELECT TOP '  + CONVERT(VARCHAR(10), @int_limit) + ' dbo.donein_dictionary.*, FirstName As vch_name_first, LastName As vch_name_last, Email As vch_email FROM dbo.donein_dictionary INNER JOIN Users ON Users.UserID = donein_dictionary.int_author WHERE vch_key != '''''
+	END	
+
+IF @int_ID != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND ID = ' + CONVERT(VARCHAR(10), @int_ID)
+	END
+
+IF @int_category != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_category = ' + CONVERT(VARCHAR(10), @int_category)
+	END
+
+IF @vch_key != ''
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND vch_key LIKE ''' + @vch_key + ''''
+	END
+
+IF @vch_value != ''
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND vch_value LIKE ''' + @vch_value + ''''
+	END
+
+IF @int_module != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_module = ' + CONVERT(VARCHAR(10), @int_module)
+	END
+
+IF @int_author != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_author = ' + CONVERT(VARCHAR(10), @int_author)
+	END
+
+IF @int_status != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_status = ' + CONVERT(VARCHAR(10), @int_status)
+	END
+
+IF @vch_order_by != ''
+	BEGIN
+		SET @STRSQL = @STRSQL + ' ORDER BY ' + @vch_order_by	
+	END
+ELSE
+	BEGIN
+		SET @STRSQL = @STRSQL + ' ORDER BY vch_key'
+	END
+
+PRINT @STRSQL
+
+EXEC sp_executesql @STRSQL
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}donein_dictionary_category_CUD
+(
+	@int_id INTEGER,
+	@vch_category VARCHAR(256) = '',
+	@int_module INTEGER = 0,
+	@int_author INTEGER = 0,
+	@int_status INTEGER = 0
+)
+AS
+
+-- CREATE
+IF @int_ID = 0
+BEGIN
+	INSERT INTO {databaseOwner}{objectQualifier}donein_dictionary_category(vch_category, int_module, int_author, int_status)
+	VALUES (@vch_category, @int_module, @int_author, @int_status)
+
+	SELECT SCOPE_IDENTITY()
+END
+
+-- UPDATE
+IF @int_ID > 0
+BEGIN
+	UPDATE
+		{databaseOwner}{objectQualifier}donein_dictionary_category
+	SET
+		vch_category = @vch_category, 
+		int_module = @int_module, 
+		int_author = @int_author, 
+		int_status = @int_status
+	WHERE 
+		ID = @int_ID
+
+	SELECT @int_ID
+END
+
+-- DELETE
+IF @int_ID < 0
+BEGIN
+	DELETE
+	FROM
+		{databaseOwner}{objectQualifier}donein_dictionary_category
+	WHERE
+		ID = (@int_ID * -1)
+END
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS OFF 
+GO
+
+CREATE PROCEDURE {databaseOwner}{objectQualifier}[donein_dictionary_category_R]
+(
+	@int_ID INT = 0,
+	@vch_category VARCHAR(256) ='',
+	@int_module INT = 0,
+	@int_author INT = 0,
+	@int_status INT = 0,
+	@vch_order_by VARCHAR(64) = '',
+	@int_limit INT = 50
+)
+
+AS
+
+DECLARE @STRSQL NVARCHAR(4000)
+
+IF @int_limit != 0
+	BEGIN
+		SET @STRSQL = 'SELECT TOP '  + CONVERT(VARCHAR(10), @int_limit) + ' * FROM {databaseOwner}{objectQualifier}donein_dictionary_category WHERE vch_category != '''''
+	END
+ELSE
+	BEGIN
+		SET @STRSQL = 'SELECT TOP 50 * FROM {databaseOwner}{objectQualifier}donein_dictionary_category WHERE vch_category != '''''
+	END
+
+IF @int_ID != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND ID = ' + CONVERT(VARCHAR(10), @int_ID)
+	END
+
+IF @vch_category != ''
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND vch_category LIKE ''' + @vch_category + ''''
+	END
+
+IF @int_module != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_module = ' + CONVERT(VARCHAR(10), @int_module)
+	END
+
+IF @int_author != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_author = ' + CONVERT(VARCHAR(10), @int_author)
+	END
+
+IF @int_status != 0
+	BEGIN
+		SET @STRSQL = @STRSQL + ' AND int_status = ' + CONVERT(VARCHAR(10), @int_status)
+	END
+
+IF @vch_order_by != ''
+	BEGIN
+		SET @STRSQL = @STRSQL + ' ORDER BY ' + @vch_order_by	
+	END
+ELSE
+	BEGIN
+		SET @STRSQL = @STRSQL + ' ORDER BY vch_category, date_audit_created'
+	END
+
+PRINT @STRSQL
+
+EXEC sp_executesql @STRSQL
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER ON 
+GO
+SET ANSI_NULLS ON 
+GO
+
+CREATE TRIGGER {databaseOwner}{objectQualifier}donein_dictionary_update_trigger ON {databaseOwner}{objectQualifier}donein_dictionary
+FOR INSERT, UPDATE, DELETE 
+AS
+UPDATE {databaseOwner}{objectQualifier}donein_dictionary
+SET date_audit_modified = GetDate() 
+FROM {databaseOwner}{objectQualifier}donein_dictionary
+INNER JOIN inserted ON donein_dictionary.ID = Inserted.ID;
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
+CREATE TRIGGER {databaseOwner}{objectQualifier}donein_dictionary_category_update_trigger ON {databaseOwner}{objectQualifier}donein_dictionary_category
+FOR INSERT, UPDATE, DELETE 
+AS
+UPDATE {databaseOwner}{objectQualifier}donein_dictionary_category
+SET date_audit_modified = GetDate() 
+FROM {databaseOwner}{objectQualifier}donein_dictionary_category
+INNER JOIN inserted ON donein_dictionary_category.ID = Inserted.ID;
+
+GO
+SET QUOTED_IDENTIFIER OFF 
+GO
+SET ANSI_NULLS ON 
+GO
+
